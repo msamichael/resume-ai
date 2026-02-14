@@ -1,65 +1,87 @@
-import Image from "next/image";
+"use client";
+import { Briefcase, CheckCircle2, File, Shield, StarsIcon, Upload } from "lucide-react";
+import { useState } from "react";
 
 export default function Home() {
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <main className="m-auto p-4">
+      <section className="text-center my-12 flex flex-col items-center justify-center">
+        {/* Hero Section */}
+        <div className="flex gap-2 items-center mb-4 bg-teal-50 border border-teal-200/80 px-3 py-1 rounded-full">
+          <StarsIcon className="text-teal-700" size={20} />
+          <span className="text-teal-700 font-medium ">AI-Powered Resume Optimization</span>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+        <h1 className="mb-4 text-4xl md:text-5xl font-medium text">Beat the ATS</h1>
+        <p className="mb-6 text-slate-400 text-4xl md:text-5xl font-medium text">Improve your resume in minutes.</p>
+        <p className="text-slate-500 text-lg max-w-2xl">
+          Paste the job description and upload your resume to get your fit score
+          instantly.
+        </p>
+
+        {/* Form Section */}
+        <form action="">
+          <div className="flex gap-y-20 mt-4 flex-col items-center ">
+            {/* Job Description */}
+            <div className="flex flex-col items-start gap-2 border border-gray-300 rounded-2xl p-4 w-[80vw] max-w-[900px] h-90 shadow-sm">
+              <p className="flex gap-2 items-center text-sm font-semibold text-gray-700">
+                <span>
+                  <Briefcase size={20} />
+                </span>
+                Job Description
+              </p>
+              <textarea
+                placeholder="Paste the job listing here..."
+                className="flex-1 border border-gray-300 rounded-xl resize-none w-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500"
+              />
+            </div>
+
+            {/* Resume Upload */}
+            <div className="flex flex-col items-start gap-2 border border-gray-300 rounded-2xl p-4 w-[80vw] max-w-[900px] h-90 shadow-sm">
+              <p className="flex gap-2 items-center text-sm font-semibold text-gray-700">
+                <span>
+                  <File size={20} />
+                </span>
+                Resume
+              </p>
+              <label className="relative w-full h-full border-2 border-dashed border-slate-300 hover:border-teal-500 hover:bg-teal-50/30 rounded-xl bg-slate-200/50 cursor-pointer">
+                <input
+                  type="file"
+                  className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                  onChange={(e) => setSelectedFile(e.target.files?.[0] || null)}
+                />
+                <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 text-zinc-500 pointer-events-none">
+                 {
+                  selectedFile ? (
+                    <>
+                    <CheckCircle2 className="text-teal-500" size={24}  />
+                    <span className="text-sm">{selectedFile.name}</span>
+                    </>
+                  ):(
+                    <>
+                    <div className="bg-zinc-100 shadow-sm h-16 w-16 p-0.5 rounded-full flex items-center justify-center"> 
+
+                    <Upload className="h-8 w-8" />
+                    </div>
+                    <span className="font-medium text-gray-700">Click to upload</span>
+                    </>
+                  )
+                 }
+                </div>
+              </label>
+            </div>
+
+            {/* Submit Button */}
+            <button className="bg-gray-800 group relative hover:bg-gray-900 cursor-pointer text-white w-fit px-4 py-2 rounded-xl shadow-lg shadow-black/20 hover:shadow-black/40 hover:-translate-y-0.5  hover:text-white transition-colors duration-300">
+              Analyze Resume
+              {/* Gradient Ov erlay */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-50 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out"></div>
+            </button>
+          </div>
+        </form>
+        <p className="text-slate-500 text-sm mt-4"><span><Shield size={16} className="inline mr-1" /></span>No data is stored</p>
+      </section>
+    </main>
   );
 }
