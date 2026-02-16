@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Imperial_Script } from "next/font/google";
+import LocalFont from "next/font/local";
 import "./globals.css";
 
-const geistSans = Geist({
+export const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
@@ -11,6 +12,30 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+
+const imperialScript = Imperial_Script({
+  variable: "--font-imperial-script",
+  subsets: ["latin"],
+  weight: "400",
+  display: "swap",
+}); 
+
+export const aeonik = LocalFont({
+  src: [
+    { path: "./fonts/Aeonik-Regular.ttf", weight: "400", style: "normal" },
+  ],
+  variable: "--font-aeonik",
+  display: "swap",
+});
+
+export const newsreader = LocalFont({
+  src: [
+    { path: "./fonts/Newsreader-italic.ttf", weight: "400", style: "italic" },
+  ],
+  variable: "--font-newsreader",
+  display: "swap",
+});
+
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -25,9 +50,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${aeonik.variable} ${imperialScript.variable} ${newsreader.variable} font-sansantialiased`}
       >
-        <p>Logo</p>
+        <h2 className="text-2xl font-bold ">Resume<span className=" text-teal-700">AI</span></h2>
         {children}
       </body>
     </html>

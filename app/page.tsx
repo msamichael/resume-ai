@@ -1,6 +1,8 @@
 "use client";
 import { Briefcase, CheckCircle2, File, Shield, StarsIcon, Upload } from "lucide-react";
 import { useState } from "react";
+import { Geist } from 'next/font/google';
+import { newsreader } from './layout';
 
 export default function Home() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -13,7 +15,7 @@ export default function Home() {
           <StarsIcon className="text-teal-700" size={20} />
           <span className="text-teal-700 font-medium ">AI-Powered Resume Optimization</span>
         </div>
-        <h1 className="mb-4 text-4xl md:text-5xl font-medium text">Beat the ATS</h1>
+        <h1 className="mb-4 text-4xl md:text-5xl font-medium text"><span className="font-newsreader text-teal-700 ">Beat</span> the ATS</h1>
         <p className="mb-6 text-slate-400 text-4xl md:text-5xl font-medium text">Improve your resume in minutes.</p>
         <p className="text-slate-500 text-lg max-w-2xl">
           Paste the job description and upload your resume to get your fit score
@@ -48,6 +50,7 @@ export default function Home() {
               <label className="relative w-full h-full border-2 border-dashed border-slate-300 hover:border-teal-500 hover:bg-teal-50/30 rounded-xl bg-slate-200/50 cursor-pointer">
                 <input
                   type="file"
+                  accept=".pdf,.docx"
                   className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                   onChange={(e) => setSelectedFile(e.target.files?.[0] || null)}
                 />
@@ -65,6 +68,7 @@ export default function Home() {
                     <Upload className="h-8 w-8" />
                     </div>
                     <span className="font-medium text-gray-700">Click to upload</span>
+                    <p className="text-slate-500 text-xs"> Supports PDF or DOCX</p>
                     </>
                   )
                  }
