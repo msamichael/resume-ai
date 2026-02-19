@@ -1,8 +1,6 @@
 "use client";
 import { Briefcase, CheckCircle2, File, Shield, StarsIcon, Upload } from "lucide-react";
 import { useState } from "react";
-import { Geist } from 'next/font/google';
-import { newsreader } from './layout';
 
 export default function Home() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);

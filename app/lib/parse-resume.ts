@@ -20,11 +20,12 @@ export async function parseResume(file: File): Promise<string> {
       const data = await pdf(buffer);
       return data.text;
     }
+    // Check if file is a DOCX
     if (lowerName.endsWith('.docx')) {
       const result = await mammoth.extractRawText({ buffer });
       return result.value;
     }
-    throw new Error('Unsupported file type');
+    throw new Error('Unsupported file type. Please upload a PDF or DOCX file.');
   } catch (error) {
     console.error('Error parsing resume:', error);
     throw new Error('Failed to parse resume');

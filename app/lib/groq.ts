@@ -1,6 +1,6 @@
 import { Groq } from "groq-sdk";
 
-const groq = new Groq({ apiKey: process.env.GROQ_API_KEY || "" });
+const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
 export async function callGroq(prompt: string, retryCount = 3): Promise<any> {
   for (let attempt = 1; attempt <= retryCount; attempt++) {
