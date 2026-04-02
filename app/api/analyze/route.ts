@@ -1,7 +1,9 @@
 import { callGroq } from "@/app/lib/groq";
-import { parseResume } from "@/app/lib/parse-resume";
+import { parseResume } from "@/app/lib/parseResume";
 import { NextResponse } from "next/server";
 import { z } from "zod";
+
+export const runtime = "nodejs";
 
 // Zod Schema for validating incoming request data
 const ExtractionSchema = z.object({
@@ -103,10 +105,10 @@ ${JSON.stringify(scoringResult)}  `;
       suggestions: suggestionsResult,
     });
   } catch (error) {
-    console.error("Error parsing request body:", error);
+    console.error("Analysis route failed:", error);
     return NextResponse.json(
-      { error: "Invalid request body" },
-      { status: 400 },
+      { error: "Analysis Failed",  details: error instanceof Error ? error.message : "Unknown error", },
+      { status: 500},
     );
   }
 }

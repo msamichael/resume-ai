@@ -1,19 +1,58 @@
 "use client";
 import { Briefcase, CheckCircle2, File, Shield, StarsIcon, Upload } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function Home() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [jobDescription, setJobDescription] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+const router = useRouter();
+
+  const fetchResults = async () => {
+      if (!selectedFile || !jobDescription.trim()) return;
+
+      setIsLoading(true);
+
+    try {
+      const formData = new FormData();
+      formData.append("job_description", jobDescription);
+        formData.append("resume", selectedFile);
+        const response = await fetch("/api/analyze", 
+        { method: "POST" ,
+        body: formData
+        });   
+      if (!response.ok) {  
+        const text = await response.text();
+  throw new Error(`HTTP error! status: ${response.status} - ${text}`);}
+
+      const data = await response.json();
+      sessionStorage.setItem("analysisResult", JSON.stringify(data));
+
+      router.push("/analyze");
+
+
+      console.log("Analysis results:", data);
+    }  catch (error) {     
+       console.error("Error fetching analysis results:", error);
+    } finally {
+      
+    setIsLoading(false);
+    }
+
+  };   
+
 
   return (
     <main className="m-auto p-4">
       <section className="text-center my-12 flex flex-col items-center justify-center">
         {/* Hero Section */}
-        <div className="flex gap-2 items-center mb-4 bg-teal-50 border border-teal-200/80 px-3 py-1 rounded-full">
+        <div className="flex gap-2 items-center mb-4 bg-teal-50 border border-teal-200/80 px-3 py-1 rounded-full animate-fade-in *:animate-fade-in">
           <StarsIcon className="text-teal-700" size={20} />
           <span className="text-teal-700 font-medium ">AI-Powered Resume Optimization</span>
         </div>
-        <h1 className="mb-4 text-4xl md:text-5xl font-medium text"><span className="font-newsreader text-teal-700 ">Beat</span> the ATS</h1>
+        <h1 className="mb-4 text-4xl md:text-5xl font-medium text"><span className="font-newsreader text-teal-700 ">Stronger</span> Job Match </h1>
         <p className="mb-6 text-slate-400 text-4xl md:text-5xl font-medium text">Improve your resume in minutes.</p>
         <p className="text-slate-500 text-lg max-w-2xl">
           Paste the job description and upload your resume to get your fit score
@@ -21,7 +60,11 @@ export default function Home() {
         </p>
 
         {/* Form Section */}
-        <form action="">
+        <form 
+        onSubmit={(e) => {e.preventDefault();
+        fetchResults();
+        }}
+        className="w-full flex items-center justify-center">
           <div className="flex gap-y-20 mt-4 flex-col items-center ">
             {/* Job Description */}
             <div className="flex flex-col items-start gap-2 border border-gray-300 rounded-2xl p-4 w-[80vw] max-w-[900px] h-90 shadow-sm">
@@ -32,8 +75,11 @@ export default function Home() {
                 Job Description
               </p>
               <textarea
+              name="job_description"
                 placeholder="Paste the job listing here..."
                 className="flex-1 border border-gray-300 rounded-xl resize-none w-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                value={jobDescription}
+                onChange={(e) => setJobDescription(e.target.value)}
               />
             </div>
 
@@ -43,10 +89,11 @@ export default function Home() {
                 <span>
                   <File size={20} />
                 </span>
-                Resume
+                Resume 
               </p>
               <label className="relative w-full h-full border-2 border-dashed border-slate-300 hover:border-teal-500 hover:bg-teal-50/30 rounded-xl bg-slate-200/50 cursor-pointer">
                 <input
+                name="resume"
                   type="file"
                   accept=".pdf,.docx"
                   className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
@@ -75,11 +122,26 @@ export default function Home() {
             </div>
 
             {/* Submit Button */}
-            <button className="bg-gray-800 group relative hover:bg-gray-900 cursor-pointer text-white w-fit px-4 py-2 rounded-xl shadow-lg shadow-black/20 hover:shadow-black/40 hover:-translate-y-0.5  hover:text-white transition-colors duration-300">
-              Analyze Resume
-              {/* Gradient Ov erlay */}
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-50 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out"></div>
-            </button>
+           <button
+  type="submit"
+  disabled={isLoading}
+  className="bg-gray-800 group relative hover:bg-gray-900 cursor-pointer text-white w-fit px-4 py-2 rounded-xl shadow-lg shadow-black/20 hover:shadow-black/40 hover:-translate-y-0.5 hover:text-white transition-colors duration-300 disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:translate-y-0"
+>
+  <span className="flex items-center gap-2">
+    {isLoading ? (
+      
+       " Analyzing..."
+      
+    ) : (
+      "Analyze"
+    )}
+  </span>
+
+  {/* Gradient overlay — hide when loading */}
+  {!isLoading && (
+    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-50 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out" />
+  )}
+</button>
           </div>
         </form>
         <p className="text-slate-500 text-sm mt-4"><span><Shield size={16} className="inline mr-1" /></span>No data is stored</p>

@@ -1,4 +1,4 @@
-import pdf from 'pdf-parse';
+import { extractText } from "unpdf";
 import mammoth from 'mammoth';
 
 /**
@@ -6,7 +6,7 @@ import mammoth from 'mammoth';
  * @param file - File object representing the PDF to parse
  * @returns Promise containing the extracted text
  */
-export async function parseResume(file: File): Promise<string> {
+export async function parseResume(file: File): Promise<string[]|string> {
   try {
     if (!file.name) {
       throw new Error('File has no name');
@@ -17,8 +17,8 @@ export async function parseResume(file: File): Promise<string> {
 
     // Check if file is a PDF
     if (lowerName.endsWith('.pdf')) {
-      const data = await pdf(buffer);
-      return data.text;
+      const {text} = await extractText(new Uint8Array(buffer)) ;
+      return text;
     }
     // Check if file is a DOCX
     if (lowerName.endsWith('.docx')) {
