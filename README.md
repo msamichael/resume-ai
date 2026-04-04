@@ -1,17 +1,54 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Resume AI - ATS Optimizer
 
-## Getting Started
+An AI-powered Resume Analysis tool designed to bridge the gap between job seekers and Applicant Tracking Systems (ATS). This application analyzes resumes against specific job descriptions to provide rigorous scoring, keyword gap analysis, and professional rewrites using the STAR method.
 
-First, run the development server:
+## 🚀 Features
+
+- **Deep Extraction**: Automatically identifies must-have skills, nice-to-have qualifications, and critical domain keywords from any Job Description.
+- **Rigorous ATS Scoring**: Provides a 0-100 fit score based on a professional rubric covering Skills, Experience, Education, and Job Title alignment.
+- **Evidence Matching**: Highlights specific excerpts from the resume that prove a match for the target role.
+- **STAR-Method Rewrites**: Generates 3-8 high-impact suggestions with tailored rewrites to improve ATS readability and recruiter appeal.
+- **Privacy-First**: Analysis results are stored in `sessionStorage`, ensuring no data persists after the browser tab is closed.
+
+## 🛠️ Tech Stack
+
+- **Framework**: Next.js 15 (App Router)
+- **AI Engine**: Groq SDK (Running `llama-3.3-70b-versatile`)
+- **Validation**: Zod for strict schema enforcement of AI responses.
+- **Icons**: Lucide React
+- **Styling**: Tailwind CSS
+
+## ⚙️ Getting Started
+
+### Prerequisites
+
+You will need a Groq API Key. Get one at the Groq Console.
+
+### Environment Variables
+
+Create a `.env.local` file in the root directory and add:
+
+```bash
+GROQ_API_KEY=your_groq_api_key_here
+```
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/resume-ai.git
+   cd resume-ai
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
