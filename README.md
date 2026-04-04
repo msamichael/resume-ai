@@ -7,7 +7,7 @@ An AI-powered Resume Analysis tool designed to bridge the gap between job seeker
 - **Deep Extraction**: Automatically identifies must-have skills, nice-to-have qualifications, and critical domain keywords from any Job Description.
 - **Rigorous ATS Scoring**: Provides a 0-100 fit score based on a professional rubric covering Skills, Experience, Education, and Job Title alignment.
 - **Evidence Matching**: Highlights specific excerpts from the resume that prove a match for the target role.
-- **STAR-Method Rewrites**: Generates 3-8 high-impact suggestions with tailored rewrites to improve ATS readability and recruiter appeal.
+- **AI Recommendations**: Generates 3-8 high-impact suggestions with tailored rewrites to improve ATS readability and recruiter appeal.
 - **Privacy-First**: Analysis results are stored in `sessionStorage`, ensuring no data persists after the browser tab is closed.
 
 ## 🛠️ Tech Stack
@@ -22,7 +22,7 @@ An AI-powered Resume Analysis tool designed to bridge the gap between job seeker
 
 ### Prerequisites
 
-You will need a Groq API Key. Get one at the Groq Console.
+Get a Groq API Key at the Groq Console.
 
 ### Environment Variables
 

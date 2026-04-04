@@ -29,7 +29,7 @@ export const aeonik = LocalFont({
 });
 
 export const newsreader = LocalFont({
-  src: [{ path: "./fonts/Newsreader-italic.ttf", weight: "400", style: "italic" }],
+  src: [{ path: "./fonts/Newsreader-Italic.ttf", weight: "400", style: "italic" }],
   variable: "--font-newsreader",
   display: "swap",
 });
