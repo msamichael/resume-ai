@@ -210,6 +210,9 @@ export default function AnalyzePage() {
                 ),
               )}
             </div>
+            <p className="text-[12px] text-gray-400 mt-4 italic">
+                *Extracted from Resume
+              </p>
           </div>
 
           {/* Missing Keywords */}
