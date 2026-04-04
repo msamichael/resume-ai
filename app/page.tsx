@@ -48,11 +48,11 @@ const router = useRouter();
     <main className="m-auto p-4">
       <section className="text-center my-12 flex flex-col items-center justify-center">
         {/* Hero Section */}
-        <div className="flex gap-2 items-center mb-4 bg-teal-50 border border-teal-200/80 px-3 py-1 rounded-full animate-fade-in *:animate-fade-in">
+        <div className="flex gap-2 items-center mb-4 bg-teal-50 border border-teal-200/80 px-3 py-1 rounded-full">
           <StarsIcon className="text-teal-700" size={20} />
           <span className="text-teal-700 font-medium ">AI-Powered Resume Optimization</span>
         </div>
-        <h1 className="mb-4 text-4xl md:text-5xl font-medium text"><span className="font-newsreader text-teal-700 ">Stronger</span> Job Match </h1>
+        <h1 className="mb-4 text-4xl md:text-5xl font-medium text"><span className="font-newsreader text-teal-700 animate-fade-in-up3 ">Stronger</span> Job Match </h1>
         <p className="mb-6 text-slate-400 text-4xl md:text-5xl font-medium text">Improve your resume in minutes.</p>
         <p className="text-slate-500 text-lg max-w-2xl">
           Paste the job description and upload your resume to get your fit score

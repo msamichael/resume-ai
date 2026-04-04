@@ -2,7 +2,7 @@ function CircularProgress({ value = 0, size = 120, strokeWidth = 10, label = "" 
   const radius = (size - strokeWidth) / 2
   const circumference = 2 * Math.PI * radius
   const offset = circumference * (1 - value / 100)
-  const color = value >= 60 ? "#378ADD" : value >= 30 ? "#EF9F27" : "#E24B4A"
+  const color = value >= 80 ? "#16A34A": value >= 60 ? "#378ADD" : value >= 30 ? "#EF9F27" : "#E24B4A"
  
   return (
     <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
