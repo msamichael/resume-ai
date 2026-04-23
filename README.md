@@ -7,6 +7,18 @@ Resume AI runs your resume through the same logic ATS systems use, scores it aga
 **[Live Demo →](https://theresume-ai.vercel.app)**
 
 ---
+### Home View
+<img width="941" height="476" alt="resumeAI1" src="https://github.com/user-attachments/assets/76de1166-c717-41ef-b9a7-e0fef627f249" />
+
+### Resume Upload View
+<img width="938" height="477" alt="resumeAI2" src="https://github.com/user-attachments/assets/37177110-c21a-40a0-9ebe-e6f610cbd0cc" />
+
+### Analysis Result View
+<img width="941" height="472" alt="resumeAI3" src="https://github.com/user-attachments/assets/5830ad3f-bf60-4483-ba4e-1f36e94c3b86" />
+
+
+
+---
 
 ## Features
 
